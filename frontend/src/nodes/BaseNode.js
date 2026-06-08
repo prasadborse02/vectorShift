@@ -2,9 +2,10 @@
 
 import { Handle } from 'reactflow';
 
-export const BaseNode = ({ id, title, handles, children, style }) => {
+export const BaseNode = ({ id, title, handles, children, style, nodeType }) => {
+  const typeClass = nodeType ? `base-node--${nodeType}` : '';
   return (
-    <div style={{ width: 200, height: 80, border: '1px solid black', ...style }}>
+    <div className={`base-node ${typeClass}`} style={style}>
       {handles
         .filter((h) => h.type === 'target')
         .map((handle) => (
@@ -16,10 +17,10 @@ export const BaseNode = ({ id, title, handles, children, style }) => {
             style={handle.style}
           />
         ))}
-      <div>
+      <div className="base-node__header">
         <span>{title}</span>
       </div>
-      <div>{children}</div>
+      <div className="base-node__body">{children}</div>
       {handles
         .filter((h) => h.type === 'source')
         .map((handle) => (

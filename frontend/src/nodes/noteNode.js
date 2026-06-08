@@ -9,7 +9,7 @@ export const NoteNode = ({ id, data }) => {
   const handles = [];
 
   return (
-    <BaseNode id={id} title="Note" handles={handles}>
+    <BaseNode id={id} title="Note" handles={handles} nodeType="note">
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}

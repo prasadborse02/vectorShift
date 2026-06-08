@@ -63,17 +63,17 @@ export const PipelineUI = () => {
     const onDrop = useCallback(
         (event) => {
           event.preventDefault();
-    
+
           const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
           if (event?.dataTransfer?.getData('application/reactflow')) {
             const appData = JSON.parse(event.dataTransfer.getData('application/reactflow'));
             const type = appData?.nodeType;
-      
+
             // check if the dropped element is valid
             if (typeof type === 'undefined' || !type) {
               return;
             }
-      
+
             const position = reactFlowInstance.project({
               x: event.clientX - reactFlowBounds.left,
               y: event.clientY - reactFlowBounds.top,
@@ -86,7 +86,7 @@ export const PipelineUI = () => {
               position,
               data: getInitNodeData(nodeID, type),
             };
-      
+
             addNode(newNode);
           }
         },
@@ -100,7 +100,7 @@ export const PipelineUI = () => {
 
     return (
         <>
-        <div ref={reactFlowWrapper} style={{width: '100wv', height: '70vh'}}>
+        <div ref={reactFlowWrapper} className="reactflow-wrapper">
             <ReactFlow
                 nodes={nodes}
                 edges={edges}

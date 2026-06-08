@@ -13,7 +13,7 @@ export const TimerNode = ({ id, data }) => {
   ];
 
   return (
-    <BaseNode id={id} title="Timer" handles={handles}>
+    <BaseNode id={id} title="Timer" handles={handles} nodeType="timer">
       <label>
         Delay (s):
         <input

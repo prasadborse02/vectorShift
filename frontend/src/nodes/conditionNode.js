@@ -14,7 +14,7 @@ export const ConditionNode = ({ id, data }) => {
   ];
 
   return (
-    <BaseNode id={id} title="Condition" handles={handles}>
+    <BaseNode id={id} title="Condition" handles={handles} nodeType="condition">
       <label>
         Condition:
         <input

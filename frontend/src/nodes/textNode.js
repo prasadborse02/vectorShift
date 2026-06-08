@@ -35,11 +35,11 @@ export const TextNode = ({ id, data }) => {
     const numLines = lines.length;
 
     // Grow width based on longest line (approx 8px per char + padding)
-    const width = Math.max(200, Math.min(longestLine * 8 + 40, 500));
+    const width = Math.max(220, Math.min(longestLine * 8 + 40, 500));
     // Grow height based on number of lines (approx 20px per line + padding for title/label)
-    const height = Math.max(80, numLines * 20 + 60);
+    const height = Math.max(100, numLines * 20 + 80);
 
-    return { width, height };
+    return { width, minHeight: height };
   }, [currText]);
 
   // Build handles: variable target handles on left + source handle on right
@@ -58,7 +58,7 @@ export const TextNode = ({ id, data }) => {
   }, [id, variables]);
 
   return (
-    <BaseNode id={id} title="Text" handles={handles} style={nodeStyle}>
+    <BaseNode id={id} title="Text" handles={handles} style={nodeStyle} nodeType="text">
       <label>
         Text:
         <textarea

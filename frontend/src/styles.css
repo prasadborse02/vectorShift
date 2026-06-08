@@ -1,0 +1,327 @@
+/* ============================================================
+   VectorShift Pipeline Builder — Global Styles
+   ============================================================ */
+
+/* --- CSS Custom Properties --- */
+:root {
+  --color-bg: #f0f2f5;
+  --color-surface: #ffffff;
+  --color-text: #1a1a2e;
+  --color-text-secondary: #64748b;
+  --color-border: #e2e8f0;
+  --color-primary: #6366f1;
+  --color-primary-hover: #4f46e5;
+
+  /* Node type accent colors */
+  --node-input: #3b82f6;
+  --node-output: #22c55e;
+  --node-llm: #8b5cf6;
+  --node-text: #f59e0b;
+  --node-api: #ef4444;
+  --node-condition: #06b6d4;
+  --node-timer: #ec4899;
+  --node-note: #a3a3a3;
+  --node-transform: #f97316;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  --transition: 0.2s ease;
+}
+
+/* ============================================================
+   App Layout
+   ============================================================ */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--color-bg);
+  overflow: hidden;
+}
+
+/* ============================================================
+   Toolbar
+   ============================================================ */
+.pipeline-toolbar {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 12px 20px;
+  box-shadow: var(--shadow-sm);
+  z-index: 10;
+}
+
+.pipeline-toolbar__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+/* ============================================================
+   Draggable Node (Toolbar items)
+   ============================================================ */
+.draggable-node {
+  cursor: grab;
+  min-width: 80px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: #fff;
+  transition: transform var(--transition), box-shadow var(--transition);
+  user-select: none;
+  padding: 0 18px;
+}
+
+.draggable-node:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.draggable-node:active {
+  transform: translateY(0);
+}
+
+/* Per-type toolbar pill colors */
+.draggable-node--customInput  { background: var(--node-input); }
+.draggable-node--llm          { background: var(--node-llm); }
+.draggable-node--customOutput { background: var(--node-output); }
+.draggable-node--text          { background: var(--node-text); }
+.draggable-node--api           { background: var(--node-api); }
+.draggable-node--condition     { background: var(--node-condition); }
+.draggable-node--timer         { background: var(--node-timer); }
+.draggable-node--note          { background: var(--node-note); }
+.draggable-node--transform     { background: var(--node-transform); }
+
+/* ============================================================
+   ReactFlow Canvas Wrapper
+   ============================================================ */
+.reactflow-wrapper {
+  flex: 1;
+  width: 100vw;
+}
+
+/* ============================================================
+   Base Node Card
+   ============================================================ */
+.base-node {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+  min-width: 220px;
+  overflow: visible;
+  font-size: 13px;
+  transition: box-shadow var(--transition);
+}
+
+.base-node:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Colored top bar per node type */
+.base-node__header {
+  padding: 8px 14px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  background: var(--color-text-secondary); /* fallback if no type matched */
+}
+
+.base-node__body {
+  padding: 10px 14px 12px;
+}
+
+/* Node type header colors */
+.base-node--customInput  .base-node__header { background: var(--node-input); }
+.base-node--llm          .base-node__header { background: var(--node-llm); }
+.base-node--customOutput .base-node__header { background: var(--node-output); }
+.base-node--text         .base-node__header { background: var(--node-text); }
+.base-node--api          .base-node__header { background: var(--node-api); }
+.base-node--condition    .base-node__header { background: var(--node-condition); }
+.base-node--timer        .base-node__header { background: var(--node-timer); }
+.base-node--note         .base-node__header { background: var(--node-note); }
+.base-node--transform    .base-node__header { background: var(--node-transform); }
+
+/* ============================================================
+   Form Controls Inside Nodes
+   ============================================================ */
+.base-node label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.base-node label:last-child {
+  margin-bottom: 0;
+}
+
+.base-node input[type="text"],
+.base-node input[type="number"],
+.base-node select,
+.base-node textarea {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--color-text);
+  background: #f8fafc;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.base-node input[type="text"]:focus,
+.base-node input[type="number"]:focus,
+.base-node select:focus,
+.base-node textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  background: #fff;
+}
+
+.base-node select {
+  cursor: pointer;
+  appearance: auto;
+}
+
+.base-node textarea {
+  resize: none;
+  min-height: 36px;
+  line-height: 1.4;
+}
+
+/* Static text inside nodes (e.g., LLM description) */
+.base-node__body > span {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+
+/* ============================================================
+   Handle Dots (ReactFlow)
+   ============================================================ */
+.react-flow__handle {
+  width: 12px !important;
+  height: 12px !important;
+  border: 2px solid #fff !important;
+  box-shadow: 0 0 0 1px var(--color-border), var(--shadow-sm) !important;
+  transition: transform var(--transition), background var(--transition);
+}
+
+.react-flow__handle:hover {
+  transform: scale(1.3);
+}
+
+.react-flow__handle.react-flow__handle-left {
+  background: var(--color-primary) !important;
+}
+
+.react-flow__handle.react-flow__handle-right {
+  background: var(--node-output) !important;
+}
+
+/* ============================================================
+   Connection Lines
+   ============================================================ */
+.react-flow__edge-path {
+  stroke: var(--color-primary) !important;
+  stroke-width: 2 !important;
+}
+
+.react-flow__connection-path {
+  stroke: var(--color-primary) !important;
+  stroke-width: 2 !important;
+  stroke-dasharray: 5 5;
+}
+
+/* ============================================================
+   MiniMap
+   ============================================================ */
+.react-flow__minimap {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+}
+
+/* ============================================================
+   Controls
+   ============================================================ */
+.react-flow__controls {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+}
+
+.react-flow__controls-button {
+  border-bottom: 1px solid var(--color-border) !important;
+}
+
+.react-flow__controls-button:hover {
+  background: #f1f5f9 !important;
+}
+
+/* ============================================================
+   Submit Button
+   ============================================================ */
+.submit-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 20px;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+}
+
+.submit-btn {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  padding: 12px 48px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  letter-spacing: 0.3px;
+}
+
+.submit-btn:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* ============================================================
+   Background dots - make them subtle
+   ============================================================ */
+.react-flow__background {
+  background-color: var(--color-bg) !important;
+}

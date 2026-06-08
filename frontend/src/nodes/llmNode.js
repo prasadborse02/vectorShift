@@ -11,7 +11,7 @@ export const LLMNode = ({ id, data }) => {
   ];
 
   return (
-    <BaseNode id={id} title="LLM" handles={handles}>
+    <BaseNode id={id} title="LLM" handles={handles} nodeType="llm">
       <span>This is a LLM.</span>
     </BaseNode>
   );

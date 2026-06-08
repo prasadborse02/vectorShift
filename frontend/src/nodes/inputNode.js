@@ -21,7 +21,7 @@ export const InputNode = ({ id, data }) => {
   ];
 
   return (
-    <BaseNode id={id} title="Input" handles={handles}>
+    <BaseNode id={id} title="Input" handles={handles} nodeType="customInput">
       <label>
         Name:
         <input

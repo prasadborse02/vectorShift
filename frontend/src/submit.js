@@ -33,8 +33,8 @@ export const SubmitButton = () => {
     };
 
     return (
-        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-            <button type="button" onClick={handleSubmit}>Submit</button>
+        <div className="submit-wrapper">
+            <button type="button" className="submit-btn" onClick={handleSubmit}>Submit</button>
         </div>
     );
 }

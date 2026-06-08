@@ -13,7 +13,7 @@ export const TransformNode = ({ id, data }) => {
   ];
 
   return (
-    <BaseNode id={id} title="Transform" handles={handles}>
+    <BaseNode id={id} title="Transform" handles={handles} nodeType="transform">
       <label>
         Type:
         <select value={transformType} onChange={(e) => setTransformType(e.target.value)}>

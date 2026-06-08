@@ -14,7 +14,7 @@ export const ApiNode = ({ id, data }) => {
   ];
 
   return (
-    <BaseNode id={id} title="API" handles={handles}>
+    <BaseNode id={id} title="API" handles={handles} nodeType="api">
       <label>
         URL:
         <input
