@@ -2,9 +2,9 @@
 
 import { Handle } from 'reactflow';
 
-export const BaseNode = ({ id, title, handles, children }) => {
+export const BaseNode = ({ id, title, handles, children, style }) => {
   return (
-    <div style={{ width: 200, height: 80, border: '1px solid black' }}>
+    <div style={{ width: 200, height: 80, border: '1px solid black', ...style }}>
       {handles
         .filter((h) => h.type === 'target')
         .map((handle) => (
