@@ -79,11 +79,6 @@ def is_dag(nodes: List[Dict[str, Any]], edges: List[Dict[str, Any]]) -> bool:
     return True
 
 
-@app.get('/')
-def read_root():
-    return {'Ping': 'Pong'}
-
-
 @app.post('/pipelines/parse')
 def parse_pipeline(data: PipelineData):
     num_nodes = len(data.nodes)
