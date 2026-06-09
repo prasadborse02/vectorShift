@@ -1,4 +1,4 @@
-// draggableNode.js
+// draggableNode.js — Sidebar node items with accent border
 
 export const DraggableNode = ({ type, label }) => {
     const onDragStart = (event, nodeType) => {
@@ -10,12 +10,13 @@ export const DraggableNode = ({ type, label }) => {
 
     return (
       <div
-        className={`draggable-node draggable-node--${type}`}
+        className={`sidebar-node sidebar-node--${type}`}
         onDragStart={(event) => onDragStart(event, type)}
         onDragEnd={(event) => (event.target.style.cursor = 'grab')}
         draggable
+        title={label}
       >
-          <span>{label}</span>
+          <span className="sidebar-node__label">{label}</span>
       </div>
     );
   };

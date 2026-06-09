@@ -1,12 +1,11 @@
-// toolbar.js
+// toolbar.js — Vertical left sidebar
 
 import { DraggableNode } from './draggableNode';
 
 export const PipelineToolbar = () => {
-
     return (
-        <div className="pipeline-toolbar">
-            <div className="pipeline-toolbar__items">
+        <div className="pipeline-sidebar">
+            <div className="pipeline-sidebar__items">
                 <DraggableNode type='customInput' label='Input' />
                 <DraggableNode type='llm' label='LLM' />
                 <DraggableNode type='customOutput' label='Output' />
