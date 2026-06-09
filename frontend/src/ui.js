@@ -167,7 +167,7 @@ export const PipelineUI = ({ theme, toggleTheme, canvasBg, setCanvasBg }) => {
     const handleSubmitDetails = useCallback(async () => {
         setMenuOpen(false);
         try {
-            const response = await fetch('http://localhost:8000/pipelines/parse', {
+            const response = await fetch('/pipelines/parse', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ nodes, edges }),

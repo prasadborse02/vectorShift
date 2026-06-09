@@ -1,5 +1,10 @@
+import os
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import List, Dict, Any
 from collections import defaultdict
@@ -13,6 +18,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Serve React build in production
+BUILD_DIR = Path(__file__).resolve().parent.parent / "frontend" / "build"
 
 
 class PipelineData(BaseModel):
@@ -82,3 +90,15 @@ def parse_pipeline(data: PipelineData):
     num_edges = len(data.edges)
     dag = is_dag(data.nodes, data.edges)
     return {'num_nodes': num_nodes, 'num_edges': num_edges, 'is_dag': dag}
+
+
+# Serve React static files in production
+if BUILD_DIR.exists():
+    app.mount("/static", StaticFiles(directory=str(BUILD_DIR / "static")), name="static")
+
+    @app.get("/{full_path:path}")
+    async def serve_react(full_path: str):
+        file_path = BUILD_DIR / full_path
+        if file_path.exists() and file_path.is_file():
+            return FileResponse(str(file_path))
+        return FileResponse(str(BUILD_DIR / "index.html"))
