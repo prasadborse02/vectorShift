@@ -3,8 +3,10 @@
 import { useState } from 'react';
 import { Position } from 'reactflow';
 import { BaseNode } from './BaseNode';
+import { useStore } from '../store';
 
 export const TimerNode = ({ id, data }) => {
+  const updateNodeField = useStore((state) => state.updateNodeField);
   const [delay, setDelay] = useState(data?.delay || 1);
 
   const handles = [
@@ -20,7 +22,7 @@ export const TimerNode = ({ id, data }) => {
           type="number"
           value={delay}
           min={0}
-          onChange={(e) => setDelay(Number(e.target.value))}
+          onChange={(e) => { setDelay(Number(e.target.value)); updateNodeField(id, 'delay', Number(e.target.value)); }}
         />
       </label>
     </BaseNode>

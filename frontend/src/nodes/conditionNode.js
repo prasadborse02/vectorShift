@@ -3,8 +3,10 @@
 import { useState } from 'react';
 import { Position } from 'reactflow';
 import { BaseNode } from './BaseNode';
+import { useStore } from '../store';
 
 export const ConditionNode = ({ id, data }) => {
+  const updateNodeField = useStore((state) => state.updateNodeField);
   const [condition, setCondition] = useState(data?.condition || '');
 
   const handles = [
@@ -20,7 +22,7 @@ export const ConditionNode = ({ id, data }) => {
         <input
           type="text"
           value={condition}
-          onChange={(e) => setCondition(e.target.value)}
+          onChange={(e) => { setCondition(e.target.value); updateNodeField(id, 'condition', e.target.value); }}
         />
       </label>
     </BaseNode>

@@ -3,12 +3,15 @@
 import { useState, useMemo } from 'react';
 import { Position } from 'reactflow';
 import { BaseNode } from './BaseNode';
+import { useStore } from '../store';
 
 export const TextNode = ({ id, data }) => {
+  const updateNodeField = useStore((state) => state.updateNodeField);
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
 
   const handleTextChange = (e) => {
     setCurrText(e.target.value);
+    updateNodeField(id, 'text', e.target.value);
   };
 
   // Parse variables from {{ variableName }} patterns
