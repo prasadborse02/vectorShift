@@ -360,6 +360,8 @@
   overflow: visible;
   font-size: 13px;
   transition: box-shadow var(--transition);
+  display: flex;
+  flex-direction: column;
 }
 
 .base-node:hover {
@@ -380,6 +382,19 @@
 
 .base-node__body {
   padding: 10px 14px 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.base-node__body label {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.base-node__body textarea {
+  flex: 1;
 }
 
 /* Node type header colors */
