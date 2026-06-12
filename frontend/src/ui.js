@@ -17,9 +17,14 @@ import { HamburgerMenu } from './HamburgerMenu';
 import { CanvasToolbar } from './CanvasToolbar';
 import { PipelineModal } from './PipelineModal';
 
+import { SmartStepEdge } from '@tisoap/react-flow-smart-edge';
+
 import 'reactflow/dist/style.css';
 
 const gridSize = 20;
+const edgeTypes = {
+  smart: SmartStepEdge,
+};
 const proOptions = { hideAttribution: true };
 const nodeTypes = {
   customInput: InputNode,
@@ -81,7 +86,7 @@ export const PipelineUI = ({ theme, toggleTheme, canvasBg, setCanvasBg }) => {
             addNode({ id: nodeID, type, position, data: getInitNodeData(nodeID, type) });
           }
         },
-        [reactFlowInstance]
+        [reactFlowInstance, getNodeID, addNode]
     );
 
     const onDragOver = useCallback((event) => {
@@ -194,6 +199,7 @@ export const PipelineUI = ({ theme, toggleTheme, canvasBg, setCanvasBg }) => {
                 onDragOver={onDragOver}
                 onInit={setReactFlowInstance}
                 nodeTypes={nodeTypes}
+                edgeTypes={edgeTypes}
                 proOptions={proOptions}
                 snapGrid={[gridSize, gridSize]}
                 connectionLineType='smoothstep'
